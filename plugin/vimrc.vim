@@ -37,7 +37,6 @@ set showbreak=@
 set colorcolumn=80,120,160
 
 set foldcolumn=1        " Set number of columns used for showing folding
-set foldmethod=indent	" Enable automatic folding with indents
 
 set hlsearch    " enables highlighting of the last pattern search
 
