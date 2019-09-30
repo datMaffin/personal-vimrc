@@ -32,7 +32,8 @@ set number              " Enable the line numbers
 set relativenumber      " Enable relative line numbers
 set cursorline          " Highlight cursor line
 
-set showbreak=@
+set linebreak
+let &showbreak="@   "
 
 set colorcolumn=80,120,160
 
