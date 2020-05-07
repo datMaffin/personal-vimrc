@@ -8,9 +8,9 @@ set scrolloff=4     " Show a few lines of context around the cursor
 set autoindent      " see :h
 set smartindent     " see :h
 set expandtab       " Insert space characters instead of tab
-set tabstop=4       " Number of Spaces for every tab inserted
-set softtabstop=4   " Delete the whole tab (of 4 spaces)
-set shiftwidth=4    " Number of spaces inserted for indentation
+set tabstop=2       " Number of Spaces for every tab inserted
+set softtabstop=2   " Delete the whole tab (of 4 spaces)
+set shiftwidth=2    " Number of spaces inserted for indentation
 
 set statusline=
 set statusline+=%#StatusLine#
