@@ -1,11 +1,54 @@
-imap jk <Esc>
+inoremap jk <Esc>
 
-set showmatch       " Show matching brackets.
-set ignorecase      " Do case insensitive matching
+" Unify defaults of Neovim and vim; Defaults are mainly from Neovim
+" Mixture of Neovim defaults and tpope/sensible
+
+set autoindent
+set autoread
+set backspace=indent,eol,start
+set belloff=all
+set complete-=i
+set cscopeverbose
+set display+=lastline " vim does not seam to have "msgsep" as an option
+set encoding=utf-8
+set formatoptions=tcqj
+set history=10000
+set hlsearch
+set incsearch
+set laststatus=2
+set listchars=tab:> ,trail:-,nbsp:+
+set nrformats=bin,hex
+"set ruler  " I use the statusline instead of the ruler
+set sessionoptions-=options
+set shortmess=filnxtToOF
+set showcmd
+set sidescroll=1
+set smarttab
+set nostartofline
+set tabpagemax=50
+set ttimeoutlen=100 " nvim uses 50
+if !empty(&viminfo)
+  set viminfo^=!
+endif
+set wildmenu
+set wildoptions=''  " Use Vim default here: I like how wild uses the statusline
+
+" Additional settings found in tpope/sensible not part of Neovim defaults
+if has('autocmd')
+  filetype plugin indent on
+endif
+if has('syntax') && !exists('g:syntax_on')
+  syntax enable
+endif
+" Use <C-L> to clear the highlighting of :set hlsearch.
+if maparg('<C-L>', 'n') ==# ''
+  nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+endif
+
 set ttymouse=xterm2 " Compatibility with tmux
 set mouse=a	    " Enable mouse support (all modes)
 set scrolloff=4     " Show a few lines of context around the cursor
-set autoindent      " see :h
+set sidescrolloff=5 " Show a few columns of context around the cursor
 set smartindent     " see :h
 set expandtab       " Insert space characters instead of tab
 set tabstop=2       " Number of Spaces for every tab inserted
@@ -37,10 +80,6 @@ let &showbreak="@   "
 
 set colorcolumn=80,120,160
 
-set foldcolumn=1        " Set number of columns used for showing folding
-
-set hlsearch    " enables highlighting of the last pattern search
-
 " Return to the same line you left off at
 augroup line_return
 	au!
@@ -49,8 +88,3 @@ augroup line_return
 		\	execute 'normal! g`"zvzz' |
 		\ endif
 augroup END
-
-" greater default size when in gvim
-if has('gui_running')
-    set lines=40 columns=95
-endif
