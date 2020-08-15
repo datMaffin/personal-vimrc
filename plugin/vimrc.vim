@@ -126,6 +126,7 @@ else
 endif
 
 set linebreak
+set breakat=^!@*+;,./?<{[()]}>
 set breakindent
 let &showbreak="@   "
 
