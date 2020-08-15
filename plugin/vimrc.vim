@@ -3,57 +3,96 @@ inoremap jk <Esc>
 " Unify defaults of Neovim and vim; Defaults are mainly from Neovim
 " Mixture of Neovim defaults and tpope/sensible
 
-set autoindent
-set autoread
-set backspace=indent,eol,start
-set belloff=all
-set complete-=i
-set cscopeverbose
-set display+=lastline " vim does not seam to have "msgsep" as an option
-set encoding=utf-8
-set formatoptions=tcqj
-set history=10000
-set hlsearch
-set incsearch
-set laststatus=2
-set listchars=tab:> ,trail:-,nbsp:+
-set nrformats=bin,hex
-"set ruler  " I use the statusline instead of the ruler
-set sessionoptions-=options
-set shortmess=filnxtToOF
-set showcmd
-set sidescroll=1
-set smarttab
-set nostartofline
-set tabpagemax=50
-set ttimeoutlen=100 " nvim uses 50
-if !empty(&viminfo)
-  set viminfo^=!
+if exists('g:loaded_personal_vimrc') || &compatible
+  finish
+else
+  let g:loaded_personal_vimrc = 'yes'
 endif
-set wildmenu
-set wildoptions=''  " Use Vim default here: I like how wild uses the statusline
 
-" Additional settings found in tpope/sensible not part of Neovim defaults
 if has('autocmd')
   filetype plugin indent on
 endif
 if has('syntax') && !exists('g:syntax_on')
   syntax enable
 endif
+
+set autoindent
+set backspace=indent,eol,start
+set complete-=i
+set smarttab
+
+set nrformats=bin,hex
+
+if !has('nvim') && &ttimeoutlen == -1
+  set ttimeout
+  set ttimeoutlen=100
+endif
+
+set incsearch
 " Use <C-L> to clear the highlighting of :set hlsearch.
 if maparg('<C-L>', 'n') ==# ''
   nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 endif
 
-set ttymouse=xterm2 " Compatibility with tmux
-set mouse=a	    " Enable mouse support (all modes)
+set laststatus=2
+set history=10000
+set wildmenu
+set wildoptions=''  " Always use statusline for wildmenu
+
 set scrolloff=4     " Show a few lines of context around the cursor
-set sidescrolloff=5 " Show a few columns of context around the cursor
-set smartindent     " see :h
+set display+=lastline 
+set encoding=utf-8
+
+set listchars=tab:> ,trail:-,nbsp:+
+
+if v:version > 703 || v:version == 703 && has("patch541")
+  set formatoptions+=j " Delete comment character when joining commented lines
+endif
+
+if has('path_extra')
+  setglobal tags-=./tags tags-=./tags; tags^=./tags;
+endif
+
+if &shell =~# 'fish$' && (v:version < 704 || v:version == 704 && !has('patch276'))
+  set shell=/usr/bin/env\ bash
+endif
+
+set autoread
+
+set sessionoptions-=options
+set viewoptions-=options
+
+set belloff=all
+set cscopeverbose
+set shortmess=filnxtToOF
+set showcmd
+set nostartofline
+set tabpagemax=50
+if !empty(&viminfo)
+  set viminfo^=!
+endif
+
+" Load matchit.vim
+if !exists('g:loaded_matchit')
+  runtime! macros/matchit.vim
+endif
+
+if empty(mapcheck('<C-U>', 'i'))
+  inoremap <C-U> <C-G>u<C-U>
+endif
+if empty(mapcheck('<C-W>', 'i'))
+  inoremap <C-W> <C-G>u<C-W>
+endif
+
+if !has('nvim')
+  set ttymouse=xterm2 " Compatibility with tmux
+endif
+set mouse=a	    " Enable mouse support (all modes)
+
 set expandtab       " Insert space characters instead of tab
-set tabstop=2       " Number of Spaces for every tab inserted
-set softtabstop=2   " Delete the whole tab (of 4 spaces)
-set shiftwidth=2    " Number of spaces inserted for indentation
+set tabstop=4       " Number of Spaces for every tab inserted
+set softtabstop=4   " Delete the whole tab (of 4 spaces)
+set shiftwidth=4    " Number of spaces inserted for indentation
 
 set statusline=
 set statusline+=%#StatusLine#
@@ -76,6 +115,7 @@ set relativenumber      " Enable relative line numbers
 set cursorline          " Highlight cursor line
 
 set linebreak
+set breakindent
 let &showbreak="@   "
 
 set colorcolumn=80,120,160
