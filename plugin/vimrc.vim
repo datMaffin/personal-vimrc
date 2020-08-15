@@ -37,13 +37,15 @@ endif
 set laststatus=2
 set history=10000
 set wildmenu
-set wildoptions=''  " Always use statusline for wildmenu
+set wildoptions=    " Always use statusline for wildmenu
 
 set scrolloff=4     " Show a few lines of context around the cursor
 set display+=lastline 
 set encoding=utf-8
 
-set listchars=tab:> ,trail:-,nbsp:+
+if &listchars ==# 'eol:$'
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+endif
 
 if v:version > 703 || v:version == 703 && has("patch541")
   set formatoptions+=j " Delete comment character when joining commented lines
