@@ -1,5 +1,9 @@
 inoremap jk <Esc>
 
+" set leader to space
+nnoremap <SPACE> <Nop>
+let mapleader=" "
+
 " Unify defaults of Neovim and vim; Defaults are mainly from Neovim
 " Mixture of Neovim defaults and tpope/sensible
 
