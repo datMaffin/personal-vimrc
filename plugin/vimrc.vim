@@ -18,8 +18,10 @@ endif
 
 set autoindent
 set backspace=indent,eol,start
-set complete-=i
 set smarttab
+
+set complete-=i
+set completeopt+=menuone,noselect
 
 set nrformats=bin,hex
 
