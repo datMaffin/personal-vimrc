@@ -81,10 +81,11 @@ if !empty(&viminfo)
     set viminfo^=!
 endif
 
-" Load matchit.vim
-if !exists('g:loaded_matchit')
-    runtime! macros/matchit.vim
-endif
+" Load optional (but normally included) packages
+packadd! matchit
+packadd! termdebug
+
+packageadd
 
 if empty(mapcheck('<C-U>', 'i'))
     inoremap <C-U> <C-G>u<C-U>
