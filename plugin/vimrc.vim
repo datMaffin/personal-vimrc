@@ -85,8 +85,6 @@ endif
 packadd! matchit
 packadd! termdebug
 
-packageadd
-
 if empty(mapcheck('<C-U>', 'i'))
     inoremap <C-U> <C-G>u<C-U>
 endif
