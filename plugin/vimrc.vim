@@ -82,8 +82,9 @@ if !empty(&viminfo)
 endif
 
 " Load optional (but normally included) packages
-packadd! matchit
-packadd! termdebug
+" If this file is used as vimrc it may be sensible to change "packadd" to "packadd!"
+packadd matchit
+packadd termdebug
 
 if empty(mapcheck('<C-U>', 'i'))
     inoremap <C-U> <C-G>u<C-U>
