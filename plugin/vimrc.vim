@@ -139,7 +139,7 @@ let &showbreak="@   "
 
 function! TextPrefFunction()
    " Set breakat to default and shorten showbreak
-   set breakat=" ^I!@*-+;:,./?"
+   set breakat=\ ^I!@*-+;:,./?
    let &showbreak="@"
 endfunction
 
