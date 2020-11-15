@@ -137,6 +137,14 @@ set breakat=^!@*+;,./?<{[()]}>
 set breakindent
 let &showbreak="@   "
 
+function! TextPrefFunction()
+   " Set breakat to default and shorten showbreak
+   set breakat=" ^I!@*-+;:,./?"
+   let &showbreak="@"
+endfunction
+
+autocmd Filetype tex call TextPrefFunction()
+
 set colorcolumn=80,120,160
 
 " Return to the same line you left off at
