@@ -4,6 +4,8 @@ inoremap jk <Esc>
 nnoremap <SPACE> <Nop>
 let mapleader=" "
 
+imap <C-BS> <C-W>
+
 " Unify defaults of Neovim and vim; Defaults are mainly from Neovim
 " Mixture of Neovim defaults and tpope/sensible
 
