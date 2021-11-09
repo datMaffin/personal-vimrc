@@ -158,3 +158,6 @@ augroup line_return
                 \	execute 'normal! g`"zvzz' |
                 \ endif
 augroup END
+
+" GVim settings
+set guioptions-=T  "remove toolbar
