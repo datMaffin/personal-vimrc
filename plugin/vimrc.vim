@@ -4,8 +4,9 @@ inoremap jk <Esc>
 nnoremap <SPACE> <Nop>
 let mapleader=" "
 
-noremap! <C-BS> <C-w>
-noremap! <C-h> <C-w>
+" Ctrl-Backspace as delete word
+"noremap! <C-BS> <C-w>
+"noremap! <C-h> <C-w>
 
 " Unify defaults of Neovim and vim; Defaults are mainly from Neovim
 " Mixture of Neovim defaults and tpope/sensible
