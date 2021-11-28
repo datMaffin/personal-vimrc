@@ -109,12 +109,7 @@ set shiftwidth=4    " Number of spaces inserted for indentation
 
 " Using the statusline and line numbers with the default colorscheme is
 " horrible
-let use_minimal_ui = 0
-"let use_minimal_ui = 1
-
-if use_minimal_ui
-    set ruler
-else
+if exists('g:use_minimal_ui') && g:use_minimal_ui
     set statusline=
     set statusline+=%#StatusLine#
     set statusline+=\ %f       "tail of the filename
@@ -134,6 +129,8 @@ else
     set number              " Enable the line numbers
     set relativenumber      " Enable relative line numbers
     set cursorline          " Highlight cursor line
+else
+    set ruler
 endif
 
 set linebreak
