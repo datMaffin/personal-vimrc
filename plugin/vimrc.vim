@@ -157,5 +157,55 @@ augroup line_return
                 \ endif
 augroup END
 
+" make clipboard work on wayland systems
+" copied from https://github.com/jasonccox/vim-wayland-clipboard/blob/master/plugin/wayland_clipboard.vim
+" The MIT License (MIT)
+"
+" Copyright (c) 2021 Jason Cox
+"
+" Permission is hereby granted, free of charge, to any person obtaining a copy
+" of this software and associated documentation files (the "Software"), to deal
+" in the Software without restriction, including without limitation the rights
+" to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+" copies of the Software, and to permit persons to whom the Software is
+" furnished to do so, subject to the following conditions:
+"
+" The above copyright notice and this permission notice shall be included in all
+" copies or substantial portions of the Software.
+"
+" THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+" IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+" FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+" AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+" LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+" OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+" SOFTWARE.
+if !empty($WAYLAND_DISPLAY) && executable('wl-copy') && executable('wl-paste')
+    " pass register contents to wl-copy if the '+' (or 'w') register was used
+    function! s:WaylandYank()
+        if v:event['regname'] == '+'
+            call system('wl-copy', getreg(v:event['regname']))
+        endif
+    endfunction
+
+    " run s:WaylandYank() after every time text is yanked
+    augroup waylandyank
+        autocmd!
+        autocmd TextYankPost * call s:WaylandYank()
+    augroup END
+    
+    
+    let prepaste = "let @\"=substitute(system('wl-paste --no-newline'), \"\\r\", '', 'g')"
+
+    for p in ['p', 'P']
+        execute "nnoremap \"+" . p . " :<C-U>" . prepaste . " \\| exec 'normal! ' . v:count1 . '" . p . "'<CR>"
+    endfor
+
+    for cr in ['<C-R>', '<C-R><C-R>', '<C-R><C-O>', '<C-R><C-P>']
+        execute "inoremap " . cr . "+ <C-O>:<C-U>" . prepaste . "<CR>" . cr . "\""
+    endfor
+
+endif
+
 " GVim settings
 set guioptions-=T  "remove toolbar
