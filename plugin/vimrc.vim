@@ -181,10 +181,17 @@ augroup END
 " OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 " SOFTWARE.
 if !empty($WAYLAND_DISPLAY) && executable('wl-copy') && executable('wl-paste')
-    " pass register contents to wl-copy if the '+' (or 'w') register was used
+
+    " cannot use the + register when the clipboard feature is disabled
+    if !has('clipboard')
+        nnoremap "+ "v
+        vnoremap "+ "v
+    endif
+
+    " pass register contents to wl-copy if the '+' (or 'v') register was used
     function! s:WaylandYank()
-        if v:event['regname'] == '+'
-            call system('wl-copy', getreg(v:event['regname']))
+        if v:event['regname'] == '+' || (v:event['regname'] == 'v' && !has('clipboard'))
+            silent call system('wl-copy', getreg(v:event['regname']))
         endif
     endfunction
 
@@ -206,6 +213,7 @@ if !empty($WAYLAND_DISPLAY) && executable('wl-copy') && executable('wl-paste')
     endfor
 
 endif
+
 
 " GVim settings
 set guioptions-=T  "remove toolbar
