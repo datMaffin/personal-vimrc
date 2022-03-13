@@ -180,7 +180,7 @@ augroup END
 " LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 " OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 " SOFTWARE.
-if !empty($WAYLAND_DISPLAY) && executable('wl-copy') && executable('wl-paste')
+if !has('nvim') && !empty($WAYLAND_DISPLAY) && executable('wl-copy') && executable('wl-paste')
 
     " cannot use the + register when the clipboard feature is disabled
     if !has('clipboard')
