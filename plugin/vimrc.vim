@@ -109,7 +109,7 @@ set shiftwidth=4    " Number of spaces inserted for indentation
 
 " Using the statusline and line numbers with the default colorscheme is
 " horrible
-if exists('g:use_detailed_ui') && g:use_detailed_ui == 1
+if exists('g:use_detailed_ui') && g:use_detailed_ui
     set statusline=
     set statusline+=%#StatusLine#
     set statusline+=\ %f       "tail of the filename
