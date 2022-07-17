@@ -48,7 +48,7 @@ endif
 set laststatus=2
 set history=10000
 set wildmenu
-set wildoptions=    " Always use statusline for wildmenu
+"set wildoptions=    " Always use statusline for wildmenu
 
 set scrolloff=4     " Show a few lines of context around the cursor
 set display+=lastline 
