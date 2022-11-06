@@ -127,7 +127,8 @@ if exists('g:use_detailed_ui') && g:use_detailed_ui
     set statusline+=\ %P    "percent through file
 
     set number              " Enable the line numbers
-    set relativenumber      " Enable relative line numbers
+    " relative numbers are seldomly useful for me and are REALLY confusing when screen sharing.
+    "set relativenumber      " Enable relative line numbers
     set cursorline          " Highlight cursor line
 else
     set ruler
