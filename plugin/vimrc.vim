@@ -147,7 +147,7 @@ endfunction
 
 autocmd Filetype tex call TextPrefFunction()
 
-set colorcolumn=80,120,160
+set colorcolumn=80,100,132
 
 " Return to the same line you left off at
 augroup line_return
