@@ -101,6 +101,7 @@ if !has('nvim')
     set ttymouse=xterm2 " Compatibility with tmux
 endif
 set mouse=a	    " Enable mouse support (all modes)
+if $TERM == 'alacritty' | set ttymouse=sgr | endif
 
 set expandtab       " Insert space characters instead of tab
 set tabstop=4       " Number of Spaces for every tab inserted
