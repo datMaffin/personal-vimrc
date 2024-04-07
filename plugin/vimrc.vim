@@ -134,6 +134,12 @@ else
     set ruler
 endif
 
+if exists('g:use_git_grep') && g:use_git_grep
+    " From https://vi.stackexchange.com/a/8858
+    set grepprg=git\ --no-pager\ grep\ --no-color\ -n\ $*
+    set grepformat=%f:%l:%m,%m\ %f\ match%ts,%f
+endif
+
 set linebreak
 set breakat=^!@*+;,./?<{[()]}>
 set breakindent
